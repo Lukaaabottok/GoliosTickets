@@ -399,12 +399,6 @@ async def on_command_error(ctx, error):
 
 # Run Bot
 if __name__ == '__main__':
-    TOKEN = os.getenv('TOKEN')
-    if not TOKEN:
-        print('❌ ERROR: No TOKEN found in environment variables!')
-        print('Please set your Discord bot token as TOKEN environment variable')
-    else:
-        if __name__ == '__main__':
     keep_alive()  # Start web server
     TOKEN = os.getenv('TOKEN')
     if not TOKEN:
