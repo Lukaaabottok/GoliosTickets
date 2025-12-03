@@ -1,3 +1,6 @@
+from keep_alive import keep_alive
+import os
+
 import discord
 from discord.ext import commands
 from discord.ui import Button, View
@@ -400,5 +403,11 @@ if __name__ == '__main__':
     if not TOKEN:
         print('❌ ERROR: No TOKEN found in environment variables!')
         print('Please set your Discord bot token as TOKEN environment variable')
+    else:
+        if __name__ == '__main__':
+    keep_alive()  # Start web server
+    TOKEN = os.getenv('TOKEN')
+    if not TOKEN:
+        print('❌ ERROR: No TOKEN found!')
     else:
         bot.run(TOKEN)
