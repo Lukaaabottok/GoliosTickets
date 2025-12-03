@@ -1,12 +1,25 @@
-from keep_alive import keep_alive
-import os
-
 import discord
 from discord.ext import commands
 from discord.ui import Button, View
 import os
 from datetime import datetime
 import asyncio
+from flask import Flask
+from threading import Thread
+
+# Flask app for keeping bot alive on Render
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "✅ Bot is alive and running!"
+
+def run():
+    app.run(host='0.0.0.0', port=8080)
+
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
 
 # Bot Configuration
 PREFIX = '.'
@@ -108,7 +121,7 @@ async def help_command(ctx):
     )
     embed.add_field(
         name='📋 Ticket Commands',
-        value='```\n.new <type> - Create a new ticket\n.close - Close current ticket\n.claim - Claim a ticket\n.unclaim - Unclaim a ticket\n.add <user> - Add user to ticket\n.remove <user> - Remove user from ticket\n.rename <name> - Rename ticket channel```',
+        value='```\n.new <type> - Create a new ticket\n.close - Close current ticket\n.claim - Claim a ticket\n.unclaim - Unclaim a ticket\n.add <user> - Add user to ticket\n.remove <user> - Remove user from ticket\n.rename <n> - Rename ticket channel```',
         inline=False
     )
     embed.add_field(
@@ -399,9 +412,11 @@ async def on_command_error(ctx, error):
 
 # Run Bot
 if __name__ == '__main__':
-    keep_alive()  # Start web server
+    keep_alive()
     TOKEN = os.getenv('TOKEN')
     if not TOKEN:
-        print('❌ ERROR: No TOKEN found!')
+        print('❌ ERROR: No TOKEN found in environment variables!')
+        print('Please set your Discord bot token as TOKEN environment variable')
     else:
+        print('🚀 Starting Discord Ticket Bot...')
         bot.run(TOKEN)
