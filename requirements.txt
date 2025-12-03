@@ -1,3 +1,7 @@
 discord.py==2.3.2
-Flask==3.0.0
+python-dotenv==1.0.0
 ```
+
+**`.env` file:**
+```
+TOKEN=your_bot_token_here
