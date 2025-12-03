@@ -1,6 +1,5 @@
 discord.py==2.3.2
 Flask==3.0.0
-```
 
 That's it! The keep_alive code is now integrated into the main bot file, so you don't need a separate `keep_alive.py` file.
 
